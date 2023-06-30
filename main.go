@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"time"
 
 	corev2 "github.com/sensu/core/v2"
 	"github.com/sensu/sensu-plugin-sdk/sensu"
@@ -15,6 +16,7 @@ type Config struct {
 	sensu.PluginConfig
 	CPU    float64
 	Memory float32
+	Scheme string
 }
 
 var (
@@ -43,6 +45,14 @@ var (
 			Usage:     "Show metrics for processes above Memory x%",
 			Value:     &plugin.Memory,
 		},
+		&sensu.PluginConfigOption[string]{
+			Path:      "scheme",
+			Argument:  "scheme",
+			Shorthand: "s",
+			Default:   "",
+			Usage:     "Scheme to prepend metric",
+			Value:     &plugin.Scheme,
+		},
 	}
 )
 
@@ -57,6 +67,9 @@ func checkArgs(event *corev2.Event) (int, error) {
 	}
 	if plugin.Memory == 100 {
 		return sensu.CheckStateWarning, fmt.Errorf("that's just stupid")
+	}
+	if plugin.Scheme == "" {
+		return sensu.CheckStateWarning, fmt.Errorf("scheme is required")
 	}
 
 	return sensu.CheckStateOK, nil
@@ -73,8 +86,8 @@ func executeCheck(event *corev2.Event) (int, error) {
 		memory, _ := p.MemoryPercent()
 		name, _ := p.Name()
 		if cpu >= plugin.CPU || memory >= plugin.Memory {
-			fmt.Printf("process.cpu_percent.%s: %f\n", strings.ReplaceAll(name, ".", "_"), Round(cpu, 0.1))
-			fmt.Printf("process.memory_percent.%s: %f\n", strings.ReplaceAll(name, ".", "_"), Round(float64(memory), 0.1))
+			fmt.Printf("%s.process.cpu_percent.%s: %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(cpu, 0.1), time.Now().Unix())
+			fmt.Printf("%s.process.memory_percent.%s: %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(float64(memory), 0.1), time.Now().Unix())
 		}
 	}
 	return sensu.CheckStateOK, nil
