@@ -86,8 +86,8 @@ func executeCheck(event *corev2.Event) (int, error) {
 		memory, _ := p.MemoryPercent()
 		name, _ := p.Name()
 		if cpu >= plugin.CPU || memory >= plugin.Memory {
-			fmt.Printf("%s.process.cpu_percent.%s: %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(cpu, 0.1), time.Now().Unix())
-			fmt.Printf("%s.process.memory_percent.%s: %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(float64(memory), 0.1), time.Now().Unix())
+			fmt.Printf("%s.process.cpu_percent.%s %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(cpu, 0.1), time.Now().Unix())
+			fmt.Printf("%s.process.memory_percent.%s %f %d\n", plugin.Scheme, strings.ReplaceAll(name, ".", "_"), Round(float64(memory), 0.1), time.Now().Unix())
 		}
 	}
 	return sensu.CheckStateOK, nil
