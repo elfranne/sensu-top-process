@@ -2,36 +2,10 @@
 ![Go Test](https://github.com/elfranne/sensu-top-process/workflows/Go%20Test/badge.svg)
 ![goreleaser](https://github.com/elfranne/sensu-top-process/workflows/goreleaser/badge.svg)
 
-# Check Plugin Template
-
-## Overview
-check-plugin-template is a template repository which wraps the [Sensu Plugin SDK][2].
-To use this project as a template, click the "Use this template" button from the main project page.
-Once the repository is created from this template, you can use the [Sensu Plugin Tool][9] to
-populate the templated fields with the proper values.
-
-## Functionality
-
-After successfully creating a project from this template, update the `Config` struct with any
-configuration options for the plugin, map those values as plugin options in the variable `options`,
-and customize the `checkArgs` and `executeCheck` functions in [main.go][7].
-
-When writing or updating a plugin's README from this template, review the Sensu Community
-[plugin README style guide][3] for content suggestions and guidance. Remove everything
-prior to `# sensu-top-process` from the generated README file, and add additional context about the
-plugin per the style guide.
-
-## Releases with Github Actions
-
-To release a version of your project, simply tag the target sha with a semver release without a `v`
-prefix (ex. `1.0.0`). This will trigger the [GitHub action][5] workflow to [build and release][4]
-the plugin with goreleaser. Register the asset with [Bonsai][8] to share it with the community!
-
-***
-
 # sensu-top-process
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Files](#files)
 - [Usage examples](#usage-examples)
@@ -42,15 +16,48 @@ the plugin with goreleaser. Register the asset with [Bonsai][8] to share it with
 - [Additional notes](#additional-notes)
 - [Contributing](#contributing)
 
-## Overview
-
-The sensu-top-process is a [Sensu Check][6] that ...
-
-## Files
-
 ## Usage examples
 
+### Basic Usage
+
+To run the check with default parameters:
+
+```shell
+sensu-top-process
+```
+
+This will execute the check with the default CPU and memory thresholds (10%) and no specific scheme or expansion for process names.
+
+### Custom Thresholds and Scheme
+
+To specify custom thresholds and a scheme:
+
+```shell
+sensu-top-process --cpu 15.5 --memory 20 --scheme my_custom_scheme
+```
+
+This sets the CPU threshold to 15.5%, the memory threshold to 20%, and prepends `my_custom_scheme` to all emitted metrics.
+
+### Expanding Process Names
+
+To expand the process name to include arguments:
+
+```shell
+sensu-top-process --expand bash
+```
+
+This expands the names of processes named 'bash' to include their command-line arguments.
+
 ## Configuration
+
+The `sensu-top-process` check can be configured with various command-line arguments:
+
+- **`--cpu` or `-c`**: Set the CPU usage threshold as a percentage.
+- **`--memory` or `-m`**: Set the memory usage threshold as a percentage.
+- **`--scheme` or `-s`**: Specify a scheme to prepend to metric outputs.
+- **`--expand` or `-e`**: Expand process name to include arguments (useful for processes like bash or powershell).
+
+_Note: Detailed descriptions and default values for these configurations are provided in the [Overview](#overview) section._
 
 ### Asset registration
 
@@ -74,11 +81,11 @@ metadata:
   name: sensu-top-process
   namespace: default
 spec:
-  command: sensu-top-process --example example_arg
+  command: sensu-top-process --cpu 15.5 --memory 20 --scheme my_scheme --expand bash
   subscriptions:
-  - system
+    - system
   runtime_assets:
-  - elfranne/sensu-top-process
+    - elfranne/sensu-top-process
 ```
 
 ## Installation from source
@@ -105,7 +112,7 @@ For more information about contributing to this plugin, see [Contributing][1].
 [4]: https://github.com/elfranne/sensu-top-process/blob/master/.github/workflows/release.yml
 [5]: https://github.com/elfranne/sensu-top-process/actions
 [6]: https://docs.sensu.io/sensu-go/latest/reference/checks/
-[7]: https://github.com/sensu/check-plugin-template/blob/master/main.go
+[7]: https://github.com/sensu/sensu-top-process/blob/master/main.go
 [8]: https://bonsai.sensu.io/
 [9]: https://github.com/sensu/sensu-plugin-tool
 [10]: https://docs.sensu.io/sensu-go/latest/reference/assets/
