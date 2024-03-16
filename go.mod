@@ -1,6 +1,6 @@
 module github.com/elfranne/sensu-top-process
 
-go 1.18
+go 1.19
 
 require (
 	github.com/sensu/core/v2 v2.19.0
