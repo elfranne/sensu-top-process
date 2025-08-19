@@ -1,4 +1,6 @@
 name: Go Lint
+permissions:
+  contents: read
 
 on: [push]
 
