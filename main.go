@@ -23,9 +23,9 @@ type Config struct {
 var (
 	plugin = Config{
 		PluginConfig: sensu.PluginConfig{
-			Name:     "check-cpu-usage",
+			Name:     "sensu-top-process",
 			Short:    "Check CPU usage and provide metrics",
-			Keyspace: "sensu.io/plugins/check-cpu-usage/config",
+			Keyspace: "sensu.io/plugins/sensu-top-process/config",
 		},
 	}
 
@@ -99,8 +99,12 @@ func ExpandName(name string, p *process.Process) string {
 
 func executeCheck(event *corev2.Event) (int, error) {
 	re := regexp.MustCompile(`-+|\s+|/+|:+|\.+|,+|=+`)
-	process, _ := process.Processes()
-	for _, p := range process {
+	procs, err := process.Processes()
+	if err != nil {
+		fmt.Printf("failed to list processes: %v\n", err)
+		return sensu.CheckStateUnknown, nil
+	}
+	for _, p := range procs {
 		cpu, _ := p.CPUPercent()
 		memory, _ := p.MemoryPercent()
 		name, _ := p.Name()
