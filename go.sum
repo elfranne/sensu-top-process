@@ -61,8 +61,8 @@ github.com/rogpeppe/go-internal v1.14.1/go.mod h1:MaRKkUm5W0goXpeCfT7UZI6fk/L7L7
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/sagikazarmark/locafero v0.12.0 h1:/NQhBAkUb4+fH1jivKHWusDYFjMOOKU88eegjfxfHb4=
 github.com/sagikazarmark/locafero v0.12.0/go.mod h1:sZh36u/YSZ918v0Io+U9ogLYQJ9tLLBmM4eneO6WwsI=
-github.com/sensu/core/v2 v2.21.3 h1:7lLawBWzzXAhJdEBeYQz5O47NrgCsveognMx8AhtS6o=
-github.com/sensu/core/v2 v2.21.3/go.mod h1:Y0G5v5Umk38J897JfIX+MllUigkzKHIdAV37NniPiEY=
+github.com/sensu/core/v2 v2.21.4 h1:eLV7wTCrIyfmCGy2cydKDwLxCBnOR4ud7JKn4k/LS68=
+github.com/sensu/core/v2 v2.21.4/go.mod h1:wNhepnDUxgPmIie4uDxDTckOkv3ByoOsyP+gu9T929U=
 github.com/sensu/sensu-api-tools v0.2.1 h1:wjT5AFdboQ3jDwzBMcD38VJEwwWhPIIuReZrCi9Ezos=
 github.com/sensu/sensu-api-tools v0.2.1/go.mod h1:SNISS4OhwNSZI9/YKTQr1bghOEwed9ZT4v+ztKk1Mq0=
 github.com/sensu/sensu-go/types v0.12.0 h1:t8gupS1QhkuA/b9LzTaF0h6DBGHX2UzKHyuBPhj/PoA=
