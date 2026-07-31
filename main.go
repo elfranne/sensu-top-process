@@ -110,7 +110,11 @@ func ExpandName(name string, p *process.Process) string {
 
 func executeCheck(event *corev2.Event) (int, error) {
 	re := regexp.MustCompile(`-+|\s+|/+|:+|\.+|,+|=+`)
-	procs, _ := process.Processes()
+	procs, err := process.Processes()
+	if err != nil {
+		fmt.Printf("failed to list processes: %v\n", err)
+		return sensu.CheckStateUnknown, nil
+	}
 
 	// Percent(0) reports CPU usage since the previous call on the same process,
 	// so seed every process, sleep once, then read the delta back. Sleeping here
