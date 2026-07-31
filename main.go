@@ -24,9 +24,9 @@ type Config struct {
 var (
 	plugin = Config{
 		PluginConfig: sensu.PluginConfig{
-			Name:     "check-cpu-usage",
+			Name:     "sensu-top-process",
 			Short:    "Check CPU usage and provide metrics",
-			Keyspace: "sensu.io/plugins/check-cpu-usage/config",
+			Keyspace: "sensu.io/plugins/sensu-top-process/config",
 		},
 	}
 
