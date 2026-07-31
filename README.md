@@ -112,8 +112,8 @@ sensu-top-process --help
 | `--sample` | | float | `1` | Seconds to measure CPU usage over. The check sleeps this long. Must be above `0`. |
 
 Every argument can also be set through the check annotation keyspace
-`sensu.io/plugins/check-cpu-usage/config` (for example the annotation
-`sensu.io/plugins/check-cpu-usage/config/cpu: "25"`).
+`sensu.io/plugins/sensu-top-process/config` (for example the annotation
+`sensu.io/plugins/sensu-top-process/config/cpu: "25"`).
 
 ### Asset registration
 
