@@ -11,6 +11,14 @@ at release time.
 
 ## [Unreleased]
 
+### Changed
+
+- Go 1.26.5 to 1.26.8, dependencies updated and `go mod tidy` run.
+- `.goreleaser.yml` migrated to GoReleaser v2 configuration. The released
+  artifacts and their filenames are unchanged.
+- Release workflow pins GoReleaser to the v2 series and fetches full history
+  through `actions/checkout` instead of a separate unshallow step.
+
 ## [0.3.0] - 2026-07-31
 
 ### Added

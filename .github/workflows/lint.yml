@@ -5,7 +5,7 @@ permissions:
 on: [push]
 
 jobs:
-  test:
+  lint:
     name: Lint
     runs-on: ${{ matrix.os }}
     strategy:
